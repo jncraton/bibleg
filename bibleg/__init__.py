@@ -13,12 +13,17 @@ def get_text(ref, version="ESV"):
     assert m != None
 
     passage_html = m.group(1)
+
+    # Trim trailing UI elements
     passage_html = re.sub(r'<div class="footnotes.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
     passage_html = re.sub(r'<div class="passage-other-trans.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
     passage_html = re.sub(r'<div class="crossrefs.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
     passage_html = re.sub(r'<a class="full-chap-link.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
 
+    # Remove headings
     passage_html = re.sub(r'(<h\d>).*?</h\d>', "", passage_html)
+
+    # Add appropriate plaintext whitespace
     passage_html = re.sub(r'(</p>)', "\1\n\n", passage_html)
     passage_html = re.sub(r'<br.*?>', "\n\n", passage_html)
     passage_html = re.sub(r'&nbsp;', " ", passage_html)
