@@ -28,4 +28,7 @@ def get_text(ref, version="ESV"):
 
     passage_text = re.sub(r"<.*?>", "", passage_html)
 
+    # Remove leading whitespace
+    passage_text = re.sub(r'\n[ \t]+', '\n', passage_text)
+
     return passage_text
