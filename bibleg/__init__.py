@@ -22,6 +22,8 @@ def get_text(ref, version="ESV"):
     passage_html = re.sub(r'<br.*?>', "\n\n", passage_html)
     passage_html = re.sub(r'&nbsp;', " ", passage_html)
 
+    passage_html = re.sub(r'<sup.*?</sup>', "", passage_html)
+
     passage_text = re.sub(r"<.*?>", "", passage_html)
 
     return passage_text
