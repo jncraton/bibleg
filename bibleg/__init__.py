@@ -12,4 +12,8 @@ def get_text(ref, version="ESV"):
 
     assert m != None
 
-    return m.group(0)
+    passage_html = m.group(0)
+
+    passage_text = re.sub(r"<.*?>", "", passage_html)
+
+    return passage_text
