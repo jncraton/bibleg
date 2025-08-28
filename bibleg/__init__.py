@@ -5,6 +5,9 @@ def get_text(ref, version="ESV"):
     """
     >>> get_text("John 11:35")
     'Jesus wept'
+
+    >>> get_text("Gen 1:1")
+    'In the beginning, God created the heavens and the earth.'
     """
     res = requests.get(f"https://www.biblegateway.com/passage/?search={ref}&version={version}")
 
