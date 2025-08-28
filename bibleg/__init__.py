@@ -18,7 +18,8 @@ def get_text(ref, version="ESV"):
     passage_html = re.sub(r'<div class="crossrefs.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
     passage_html = re.sub(r'<a class="full-chap-link.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
 
-    passage_html = re.sub(r'(</[hp]\d*>)', "\1\n\n", passage_html)
+    passage_html = re.sub(r'(<h\d>).*?</h\d>', "", passage_html)
+    passage_html = re.sub(r'(</p>)', "\1\n\n", passage_html)
     passage_html = re.sub(r'<br.*?>', "\n\n", passage_html)
     passage_html = re.sub(r'&nbsp;', " ", passage_html)
 
