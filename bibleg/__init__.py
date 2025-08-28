@@ -4,7 +4,7 @@ import re
 def get_text(ref, version="ESV"):
     """
     >>> get_text("John 11:35")
-    'Jesus wept'
+    'Jesus wept.'
 
     >>> get_text("Gen 1:1")
     'In the beginning, God created the heavens and the earth.'
