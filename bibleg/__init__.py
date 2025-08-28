@@ -32,4 +32,7 @@ def get_text(ref, version="ESV"):
     # Remove leading whitespace
     passage_text = re.sub(r'\n[ \t]+', '\n', passage_text)
 
-    return passage_text
+    # Remove trailing whitespace
+    passage_text = re.sub(r'[ \t]+\n', '\n', passage_text)
+
+    return passage_text.strip()
