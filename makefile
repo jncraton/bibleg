@@ -8,3 +8,7 @@ build:
 
 upload: build
 	python3 -m twine upload dist/*
+
+clean:
+	rm -rf dist bibleg.egg-info
+	rm -rf bibleg/__pycache__
