@@ -1,4 +1,5 @@
-import requests
+from urllib.request import urlopen
+from urllib.parse import urlencode
 import re
 
 def get_text(ref, version="ESV"):
@@ -9,11 +10,14 @@ def get_text(ref, version="ESV"):
     >>> get_text("Gen 1:1")
     'In the beginning, God created the heavens and the earth.'
     """
-    res = requests.get(f"https://www.biblegateway.com/passage/?search={ref}&version={version}")
 
-    assert res.status_code == 200
+    params = {'search': ref, 'version': version}
+    query = urlencode(params, doseq=True, safe='')
+    url = f"https://www.biblegateway.com/passage/?{query}"
 
-    html = res.content.decode()
+    with urlopen(url) as resp:
+        html = resp.read().decode()
+        assert resp.status == 200
 
     m = re.search(r'<div class="passage-text">(.*?)<div class="passage-scroller', html, flags=re.I|re.DOTALL|re.M)
 
