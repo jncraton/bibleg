@@ -2,6 +2,10 @@ import requests
 import re
 
 def get_text(ref, version="ESV"):
+    """
+    >>> get_text("John 11:35")
+    'Jesus wept'
+    """
     res = requests.get(f"https://www.biblegateway.com/passage/?search={ref}&version={version}")
 
     assert res.status_code == 200
