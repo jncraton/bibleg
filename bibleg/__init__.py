@@ -13,6 +13,7 @@ def get_text(ref, version="ESV"):
     assert m != None
 
     passage_html = m.group(1)
+    passage_html = re.sub(r'<div class="footnotes">.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
 
     passage_text = re.sub(r"<.*?>", "", passage_html)
 
