@@ -34,6 +34,7 @@ def get_text(ref, version="ESV"):
     passage_html = re.sub(r'(</p>)', "\1\n\n", passage_html)
     passage_html = re.sub(r'<br.*?>', "\n\n", passage_html)
     passage_html = re.sub(r'&nbsp;', " ", passage_html)
+    passage_html = re.sub(r'\x01', "", passage_html)
 
     # Remove crossrefs, verse numbers, and chapter numbers
     passage_html = re.sub(r'<sup.*?</sup>', "", passage_html)
