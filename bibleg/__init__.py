@@ -1,4 +1,4 @@
 import requests
 
-def get_text(ref, version):
+def get_text(ref, version="ESV"):
     return ""
