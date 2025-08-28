@@ -3,8 +3,8 @@ all: test
 test:
 	python3 -m doctest -v bibleg/__init__.py
 
-dist:
+build:
 	python3 -m build
 
-upload: dist
+upload: build
 	python3 -m twine upload dist/*
