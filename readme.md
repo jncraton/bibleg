@@ -1,5 +1,7 @@
 # bibleg
 
+[![Test](https://github.com/jncraton/bibleg/actions/workflows/test.yml/badge.svg)](https://github.com/jncraton/bibleg/actions/workflows/test.yml)
+
 Unofficial Bible API in Python
 
 ## Installation
