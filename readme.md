@@ -2,6 +2,12 @@
 
 Unofficial Bible API in Python
 
+## Installation
+
+```sh
+pip install bibleg
+```
+
 ## Usage
 
 ```python
