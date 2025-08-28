@@ -13,7 +13,10 @@ def get_text(ref, version="ESV"):
     assert m != None
 
     passage_html = m.group(1)
-    passage_html = re.sub(r'<div class="footnotes">.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
+    passage_html = re.sub(r'<div class="footnotes.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
+    passage_html = re.sub(r'<div class="passage-other-trans.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
+    passage_html = re.sub(r'<div class="crossrefs.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
+    passage_html = re.sub(r'<a class="full-chap-link.*', "", passage_html, flags=re.I|re.DOTALL|re.M)
 
     passage_text = re.sub(r"<.*?>", "", passage_html)
 
