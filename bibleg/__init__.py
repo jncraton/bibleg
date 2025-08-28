@@ -8,7 +8,7 @@ def get_text(ref, version="ESV"):
 
     html = res.content.decode()
 
-    m = re.search(r'<div class="passage-text">(.*?)<div class="footnotes">', html, flags=re.I|re.DOTALL|re.M)
+    m = re.search(r'<div class="passage-text">(.*?)<div class="passage-scroller', html, flags=re.I|re.DOTALL|re.M)
 
     assert m != None
 
