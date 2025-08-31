@@ -123,3 +123,32 @@ def get_text(ref, version="ESV"):
     passage_text = re.sub(r'[ \t]+\n', '\n', passage_text)
 
     return passage_text.strip()
+
+def normalize_verse_reference(ref):
+    """
+    >>> normalize_verse_reference("Gen 1:1")
+    (1, 1, 1)
+
+    >>> normalize_verse_reference("Ge 2:3")
+    (1, 2, 3)
+
+    >>> normalize_verse_reference("genesis 4:5")
+    (1, 4, 5)
+    """
+
+    book_chapter_verse = re.match("(.*?)[\t ]*(\d+):(\d+)", ref.strip().title())
+
+    if book_chapter_verse:
+        book_idx = None
+
+        for i, book in enumerate(BOOKS):
+            if book.startswith(book_chapter_verse[1]):
+                book_idx = i+1
+                break
+        else:
+            raise IndexError(f"Book not found: {book_chapter_verse[1]}")
+
+    chapter = int(book_chapter_verse[2])
+    verse = int(book_chapter_verse[3])
+
+    return book_idx, chapter, verse
