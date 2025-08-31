@@ -208,6 +208,9 @@ def get_verse_list(ref):
     >>> get_verse_list("Ex 2:3-5")
     [(2, 2, 3), (2, 2, 4), (2, 2, 5)]
 
+    >>> get_verse_list("Gen. 3:6-8")
+    [(1, 3, 6), (1, 3, 7), (1, 3, 8)]
+
     >>> get_verse_list("Lev 5:3,10")
     [(3, 5, 3), (3, 5, 10)]
 
