@@ -166,7 +166,7 @@ def normalize_verse_ref(ref):
     """
 
     book_codes = {
-        'Jas': 'James',
+        "Jas": "James",
     }
 
     book_chapter_verse = re.match(r"(.*?)[\t \.]*(\d+):(\d+)$", ref.strip().title())
