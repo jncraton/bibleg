@@ -178,3 +178,23 @@ def normalize_verse_reference(ref):
     verse = int(book_chapter_verse[3])
 
     return book_idx, chapter, verse
+
+def get_verse_list(ref):
+    """ Return list of verses from a larger reference
+
+    Only explicit spans are currently supported (e.g. Gen 1:2-3)
+
+    Reference may not span chapters.
+
+    Whole chapters are not currently supported.
+
+    >>> get_verse_list("Gen 1:1")
+    [(1, 1, 1)]
+    """
+
+    m = re.match(r"(.*?)(\d+)\-(\d+)", ref)
+
+    if m:
+        pass
+    else:
+        return [normalize_verse_reference(ref)]
