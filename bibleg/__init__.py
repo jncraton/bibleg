@@ -200,10 +200,21 @@ def get_verse_list(ref):
     >>> get_verse_list("Gen 1")
     Traceback (most recent call last):
     ...
-    ValueError: Incorrect reference format: Gen 1
+    IndexError: Whole chapters not supported: Gen 1
+
+    >>> get_verse_list("Gen 1:1-2:1")
+    Traceback (most recent call last):
+    ...
+    IndexError: Multi-chapter spans not supported: Gen 1:1-2:1
     """
 
-    m = re.match(r"(.*?)(\d+)\-(\d+)", ref)
+    if ref.count(":") == 0:
+        raise IndexError(f"Whole chapters not supported: {ref}")
+
+    if ref.count(":") > 1:
+        raise IndexError(f"Multi-chapter spans not supported: {ref}")
+
+    m = re.match(r"(.*?)(\d+)\-(\d+)$", ref)
 
     if m:
         root = m[1]
