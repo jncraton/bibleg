@@ -244,7 +244,7 @@ def get_verse_list(ref):
         return [normalize_verse_ref(f"{root}{v}") for v in range(v_start, v_end + 1)]
     elif m_list:
         root = m_list[1]
-        verses = [v.strip() for v in m_list[2].split(',')]
+        verses = [v.strip() for v in m_list[2].split(",")]
 
         return [normalize_verse_ref(f"{root}{v}") for v in verses]
     else:
