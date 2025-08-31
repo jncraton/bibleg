@@ -196,6 +196,11 @@ def get_verse_list(ref):
 
     >>> get_verse_list("Ex 2:3-5")
     [(2, 2, 3), (2, 2, 4), (2, 2, 5)]
+
+    >>> get_verse_list("Gen 1")
+    Traceback (most recent call last):
+    ...
+    ValueError: Incorrect reference format: Gen 1
     """
 
     m = re.match(r"(.*?)(\d+)\-(\d+)", ref)
