@@ -166,9 +166,10 @@ def normalize_verse_ref(ref):
 
     if book_chapter_verse:
         book_idx = None
+        book_needle = book_chapter_verse[1]
 
         for i, book in enumerate(BOOKS):
-            if book.startswith(book_chapter_verse[1]):
+            if book.startswith(book_needle):
                 book_idx = i + 1
                 break
         else:
