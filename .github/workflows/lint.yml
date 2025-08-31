@@ -13,5 +13,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Install dev deps
+        run: python3 -m pip install -r dev-requirements.txt
       - name: Run lint
         run: make lint
