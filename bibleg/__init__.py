@@ -160,13 +160,23 @@ def normalize_verse_ref(ref):
 
     >>> normalize_verse_ref("2 cor 01:02")
     (47, 1, 2)
+
+    >>> normalize_verse_ref("jas 3:2")
+    (59, 3, 2)
     """
+
+    book_codes = {
+        'Jas': 'James',
+    }
 
     book_chapter_verse = re.match(r"(.*?)[\t \.]*(\d+):(\d+)$", ref.strip().title())
 
     if book_chapter_verse:
         book_idx = None
         book_needle = book_chapter_verse[1]
+
+        if book_needle in book_codes:
+            book_needle = book_codes[book_needle]
 
         for i, book in enumerate(BOOKS):
             if book.startswith(book_needle):
