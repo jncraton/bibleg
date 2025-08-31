@@ -151,6 +151,9 @@ def normalize_verse_reference(ref):
 
     >>> normalize_verse_reference("genesis 4:5")
     (1, 4, 5)
+
+    >>> normalize_verse_reference("1 cor 12:3")
+    (46, 12, 3)
     """
 
     book_chapter_verse = re.match(r"(.*?)[\t ]*(\d+):(\d+)", ref.strip().title())
