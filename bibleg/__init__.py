@@ -208,6 +208,9 @@ def get_verse_list(ref):
     >>> get_verse_list("Ex 2:3-5")
     [(2, 2, 3), (2, 2, 4), (2, 2, 5)]
 
+    >>> get_verse_list("Lev 5:3,10")
+    [(3, 5, 3), (3, 5, 10)]
+
     >>> get_verse_list("Gen 1")
     Traceback (most recent call last):
     ...
@@ -225,13 +228,19 @@ def get_verse_list(ref):
     if ref.count(":") > 1:
         raise IndexError(f"Multi-chapter spans not supported: {ref}")
 
-    m = re.match(r"(.*?)(\d+)\-(\d+)$", ref)
+    m_range = re.match(r"(.*?)(\d+)\-(\d+)$", ref)
+    m_list = re.match(r"(.*?)([\d, ]+)$", ref)
 
-    if m:
-        root = m[1]
-        v_start = int(m[2])
-        v_end = int(m[3])
+    if m_range:
+        root = m_range[1]
+        v_start = int(m_range[2])
+        v_end = int(m_range[3])
 
         return [normalize_verse_ref(f"{root}{v}") for v in range(v_start, v_end + 1)]
+    elif m_list:
+        root = m_list[1]
+        verses = [v.strip() for v in m_list[2].split(',')]
+
+        return [normalize_verse_ref(f"{root}{v}") for v in verses]
     else:
         return [normalize_verse_ref(ref)]
