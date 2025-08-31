@@ -211,6 +211,9 @@ def get_verse_list(ref):
     >>> get_verse_list("Gen. 3:6-8")
     [(1, 3, 6), (1, 3, 7), (1, 3, 8)]
 
+    >>> get_verse_list("Gen. 3:6-8, 13")
+    [(1, 3, 6), (1, 3, 7), (1, 3, 8), (1, 3, 13)]
+
     >>> get_verse_list("Lev 5:3,10")
     [(3, 5, 3), (3, 5, 10)]
 
@@ -233,16 +236,16 @@ def get_verse_list(ref):
 
     ref = ref.strip()
 
-    m_range = re.match(r"(.*?)(\d+)\-(\d+)$", ref)
-    m_list = re.match(r"(.*?)([\d, ]+)$", ref)
+    def convert_range(m):
+        start = int(m[1])
+        end = int(m[2])
 
-    if m_range:
-        root = m_range[1]
-        v_start = int(m_range[2])
-        v_end = int(m_range[3])
+        return ",".join([str(i) for i in range(start, end + 1)])
 
-        return [normalize_verse_ref(f"{root}{v}") for v in range(v_start, v_end + 1)]
-    elif m_list:
+    ref_list = re.sub(r"(\d+)[ ]*\-[ ]*(\d+)", convert_range, ref)
+
+    m_list = re.match(r"(.*?)([\d, ]+)$", ref_list)
+    if m_list:
         root = m_list[1]
         verses = [v.strip() for v in m_list[2].split(",")]
 
