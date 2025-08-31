@@ -231,6 +231,8 @@ def get_verse_list(ref):
     if ref.count(":") > 1:
         raise IndexError(f"Multi-chapter spans not supported: {ref}")
 
+    ref = ref.strip()
+
     m_range = re.match(r"(.*?)(\d+)\-(\d+)$", ref)
     m_list = re.match(r"(.*?)([\d, ]+)$", ref)
 
