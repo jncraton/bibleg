@@ -12,6 +12,9 @@ upload: build
 format:
 	python3 -m black bibleg/*.py
 
+lint:
+	python3 -m flake8 --max-line-length=88 bibleg/*.py
+
 clean:
 	rm -rf dist bibleg.egg-info
 	rm -rf bibleg/__pycache__
