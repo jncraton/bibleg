@@ -141,24 +141,24 @@ def get_text(ref, version="ESV"):
     return passage_text.strip()
 
 
-def normalize_verse_reference(ref):
+def normalize_verse_ref(ref):
     """
-    >>> normalize_verse_reference("Gen 1:1")
+    >>> normalize_verse_ref("Gen 1:1")
     (1, 1, 1)
 
-    >>> normalize_verse_reference("Gen. 1:1")
+    >>> normalize_verse_ref("Gen. 1:1")
     (1, 1, 1)
 
-    >>> normalize_verse_reference("Ge 2:3")
+    >>> normalize_verse_ref("Ge 2:3")
     (1, 2, 3)
 
-    >>> normalize_verse_reference("genesis 4:5")
+    >>> normalize_verse_ref("genesis 4:5")
     (1, 4, 5)
 
-    >>> normalize_verse_reference("1 cor 12:3")
+    >>> normalize_verse_ref("1 cor 12:3")
     (46, 12, 3)
 
-    >>> normalize_verse_reference("2 cor 01:02")
+    >>> normalize_verse_ref("2 cor 01:02")
     (47, 1, 2)
     """
 
@@ -202,6 +202,6 @@ def get_verse_list(ref):
         v_start = int(m[2])
         v_end = int(m[3])
 
-        return [normalize_verse_reference(f"{root}{v}") for v in range(v_start, v_end+1)]
+        return [normalize_verse_ref(f"{root}{v}") for v in range(v_start, v_end+1)]
     else:
-        return [normalize_verse_reference(ref)]
+        return [normalize_verse_ref(ref)]
