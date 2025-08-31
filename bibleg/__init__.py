@@ -179,8 +179,9 @@ def normalize_verse_ref(ref):
 
     return book_idx, chapter, verse
 
+
 def get_verse_list(ref):
-    """ Return list of verses from a larger reference
+    """Return list of verses from a larger reference
 
     Only explicit spans are currently supported (e.g. Gen 1:2-3)
 
@@ -202,6 +203,6 @@ def get_verse_list(ref):
         v_start = int(m[2])
         v_end = int(m[3])
 
-        return [normalize_verse_ref(f"{root}{v}") for v in range(v_start, v_end+1)]
+        return [normalize_verse_ref(f"{root}{v}") for v in range(v_start, v_end + 1)]
     else:
         return [normalize_verse_ref(ref)]
