@@ -190,11 +190,18 @@ def get_verse_list(ref):
 
     >>> get_verse_list("Gen 1:1")
     [(1, 1, 1)]
+
+    >>> get_verse_list("Ex 2:3-5")
+    [(2, 2, 3), (2, 2, 4), (2, 2, 5)]
     """
 
     m = re.match(r"(.*?)(\d+)\-(\d+)", ref)
 
     if m:
-        pass
+        root = m[1]
+        v_start = int(m[2])
+        v_end = int(m[3])
+
+        return [normalize_verse_reference(f"{root}{v}") for v in range(v_start, v_end+1)]
     else:
         return [normalize_verse_reference(ref)]
