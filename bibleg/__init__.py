@@ -174,10 +174,12 @@ def normalize_verse_ref(ref):
         else:
             raise IndexError(f"Book not found: {book_chapter_verse[1]}")
 
-    chapter = int(book_chapter_verse[2])
-    verse = int(book_chapter_verse[3])
+        chapter = int(book_chapter_verse[2])
+        verse = int(book_chapter_verse[3])
 
-    return book_idx, chapter, verse
+        return book_idx, chapter, verse
+    else:
+        raise ValueError(f"Incorrect reference format: {ref}")
 
 
 def get_verse_list(ref):
