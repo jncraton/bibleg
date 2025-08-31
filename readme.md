@@ -1,5 +1,6 @@
 # bibleg
 
+[![PyPI version](https://badge.fury.io/py/bibleg.svg?icon=si%3Apython)](https://badge.fury.io/py/bibleg)
 [![Lint](https://github.com/jncraton/bibleg/actions/workflows/lint.yml/badge.svg)](https://github.com/jncraton/bibleg/actions/workflows/lint.yml)
 [![Test](https://github.com/jncraton/bibleg/actions/workflows/test.yml/badge.svg)](https://github.com/jncraton/bibleg/actions/workflows/test.yml)
 
