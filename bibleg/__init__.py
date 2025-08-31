@@ -95,7 +95,7 @@ def get_text(ref, version="ESV"):
         flags=re.I | re.DOTALL | re.M,
     )
 
-    assert m != None
+    assert m is not None
 
     passage_html = m.group(1)
 
