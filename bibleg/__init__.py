@@ -153,7 +153,7 @@ def normalize_verse_reference(ref):
     (1, 4, 5)
     """
 
-    book_chapter_verse = re.match("(.*?)[\t ]*(\d+):(\d+)", ref.strip().title())
+    book_chapter_verse = re.match(r"(.*?)[\t ]*(\d+):(\d+)", ref.strip().title())
 
     if book_chapter_verse:
         book_idx = None
