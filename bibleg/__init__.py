@@ -85,7 +85,9 @@ def get_text(ref, version="ESV"):
     'In the beginning, God created the heavens and the earth.'
 
     >>> get_text("Acts 8:37")
-    'In the beginning, God created the heavens and the earth.'
+    Traceback (most recent call last):
+    ...
+    IndexError: No text results for reference: Acts 8:37
     """
 
     global request_delay
@@ -102,6 +104,9 @@ def get_text(ref, version="ESV"):
                 request_delay *= 2
                 print(f"Retrying {ref}...", file=sys.stderr)
                 continue
+
+        if "No valid results were found for your search" in html:
+            raise IndexError(f"No text results for reference: {ref}")
 
         m = re.search(
             r'<div class="passage-text">(.*?)<div class="passage-scroller',
