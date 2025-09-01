@@ -75,6 +75,7 @@ BOOKS = [
 
 request_delay = 0.1
 
+
 def get_text(ref, version="ESV"):
     """
     >>> get_text("John 11:35")
@@ -113,8 +114,8 @@ def get_text(ref, version="ESV"):
             print(f"Retrying {ref}...", file=sys.stderr)
             continue
 
-        request_delay -= .1
-        request_delay = max(request_delay, .1)
+        request_delay -= 0.1
+        request_delay = max(request_delay, 0.1)
         break
     else:
         raise ConnectionError("Unable to get passage text")
