@@ -1,6 +1,8 @@
 from urllib.request import urlopen
 from urllib.parse import urlencode
+from time import sleep
 import re
+import sys
 
 BOOKS = [
     "Genesis",
@@ -71,6 +73,7 @@ BOOKS = [
     "Revelation",
 ]
 
+request_delay = 0.1
 
 def get_text(ref, version="ESV"):
     """
@@ -79,23 +82,42 @@ def get_text(ref, version="ESV"):
 
     >>> get_text("Gen 1:1")
     'In the beginning, God created the heavens and the earth.'
+
+    >>> get_text("Acts 8:37")
+    'In the beginning, God created the heavens and the earth.'
     """
+
+    global request_delay
 
     params = {"search": ref, "version": version}
     query = urlencode(params, doseq=True, safe="")
     url = f"https://www.biblegateway.com/passage/?{query}"
 
-    with urlopen(url) as resp:
-        html = resp.read().decode()
-        assert resp.status == 200
+    for retries in range(5):
+        sleep(request_delay)
+        with urlopen(url) as resp:
+            html = resp.read().decode()
+            if resp.status != 200:
+                request_delay *= 2
+                print(f"Retrying {ref}...", file=sys.stderr)
+                continue
 
-    m = re.search(
-        r'<div class="passage-text">(.*?)<div class="passage-scroller',
-        html,
-        flags=re.I | re.DOTALL | re.M,
-    )
+        m = re.search(
+            r'<div class="passage-text">(.*?)<div class="passage-scroller',
+            html,
+            flags=re.I | re.DOTALL | re.M,
+        )
 
-    assert m is not None
+        if m is None:
+            request_delay *= 2
+            print(f"Retrying {ref}...", file=sys.stderr)
+            continue
+
+        request_delay -= .1
+        request_delay = max(request_delay, .1)
+        break
+    else:
+        raise ConnectionError("Unable to get passage text")
 
     passage_html = m.group(1)
 
